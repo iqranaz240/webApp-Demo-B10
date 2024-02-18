@@ -10,6 +10,3 @@ if (email) {
     signIn.innerText = 'Logout';
 }
 
-const logout = () => {
-    sessionStorage.removeItem('email');
-}

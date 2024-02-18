@@ -3,15 +3,14 @@
 // Your web app's Firebase configuration
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyBWp8g42jpHAAiYr3sbx4_HTvmAYu-Z2J8",
-  authDomain: "abcd-92773.firebaseapp.com",
-  projectId: "abcd-92773",
-  storageBucket: "abcd-92773.appspot.com",
-  messagingSenderId: "394813059340",
-  appId: "1:394813059340:web:79a8aebf335cb97d225929",
-  measurementId: "G-VGBMVX5NY9"
-};
+  const firebaseConfig = {
+    apiKey: "AIzaSyBAyEBLfZaQfqr6r8jd9LShmWXOOb0K6Q4",
+    authDomain: "webapp-b10.firebaseapp.com",
+    projectId: "webapp-b10",
+    storageBucket: "webapp-b10.appspot.com",
+    messagingSenderId: "64843690643",
+    appId: "1:64843690643:web:e9768ba6e930b18c8e9366"
+  };
   
   // Initialize Firebase
   var app = firebase.initializeApp(firebaseConfig);
@@ -28,6 +27,8 @@ const firebaseConfig = {
         var user = userCredential.user;
         // ...
         console.log(user);
+        sessionStorage.setItem('email', user.email);
+        window.location.href = '../index.html'
       })
       .catch(function(error) {
         var errorCode = error.code;
@@ -46,6 +47,8 @@ const firebaseConfig = {
     // Signed in 
     const user = userCredential.user;
     console.log("Signed in user: ", user)
+    sessionStorage.setItem('email', user.email);
+    window.location.href = '../index.html';
     // ...
   })
   .catch((error) => {
@@ -68,6 +71,8 @@ console.log(provider)
     // The signed-in user info.
     var user = result.user;
     console.log(user)
+    sessionStorage.setItem('email', user.email);
+    window.location.href = '../index.html'
     // IdP data available in result.additionalUserInfo.profile.
       // ...
   }).catch((error) => {
@@ -83,3 +88,14 @@ console.log(provider)
   });
   }
   
+  function signOut () {
+    firebase.auth().signOut()
+    .then(() => {
+      sessionStorage.removeItem('email');
+      console.log("User logout successfully")
+      // Sign-out successful.
+    }).catch((error) => {
+      // An error happened.
+      console.log(error);
+    });
+  }
